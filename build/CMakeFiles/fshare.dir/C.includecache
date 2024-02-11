@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/fshare.h
+
+/home/s21900780/SFTP/gtest/src/fshare.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+fcntl.h
+-
+dirent.h
+-
+sys/stat.h
+-
+libgen.h
+-
+errno.h
+-
+pthread.h
+-
+fshare.h
+/home/s21900780/SFTP/gtest/src/fshare.h
+

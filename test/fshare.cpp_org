@@ -1,0 +1,47 @@
+#include <sys/socket.h>
+#include "gtest/gtest.h"
+#include "gmock/gmock.h"
+
+extern "C" {
+#include "fshare.h"
+}
+
+
+class SocketWrapper {
+public:
+    virtual ~SocketWrapper() {}
+    virtual int sendData(int sockfd, const void *buf, size_t len, int flags) {
+        return ::send(sockfd, buf, len, flags);
+    }
+};
+
+class MockSocket :public SocketWrapper{
+public:
+    MOCK_METHOD(int, sendData, (int, const void*, size_t, int), (override));
+};
+
+class fshare_F: public ::testing::Test {
+protected:
+    void SetUp() override {
+	const char *argv[] = {"./fshare", "127.0.0.1:9090", "list"};
+	get_option(3, argv);
+    }
+
+    void TearDown() override {
+        // 테스트 후에 실행될 코드 작성
+    }
+};
+
+
+TEST(fshare, getOption) {	
+	const char *argv[] = {"./fshare", "127.0.0.1:9090", "list"};
+	EXPECT_EQ(get_option(3, argv), 0);
+}
+
+
+TEST_F(fshare_F, request) {
+	MockSocket mock_socket;
+	EXPECT_CALL(mock_socket, sendData(_, _, _, _)).WillOnce(testing::Return(1));
+	EXPECT_EQ(request(1), 1);
+}
+

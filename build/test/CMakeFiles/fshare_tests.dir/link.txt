@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/fshare_tests.dir/__/src/fshare.c.o CMakeFiles/fshare_tests.dir/fshare.cpp.o CMakeFiles/fshare_tests.dir/main.cpp.o -o fshare_tests  ../lib/libgmock.a ../lib/libgtest_main.a -lgcov ../lib/libgtest.a -lpthread 
